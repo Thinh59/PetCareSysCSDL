@@ -185,10 +185,10 @@ database/
 
 ## 👨‍💻 Tác giả
 
-23122019 Phan Huỳnh Châu Thịnh
-23122029 Nguyễn Trọng Hòa
-23120079 Phạm Thúy Quy
-23120080 Nguyễn Ngọc Như Quỳnh
++ 23122019 Phan Huỳnh Châu Thịnh 
++ 23122029 Nguyễn Trọng Hòa
++ 23120079 Phạm Thúy Quy
++ 23120080 Nguyễn Ngọc Như Quỳnh
 
 ---
 
