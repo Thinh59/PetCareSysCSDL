@@ -51,10 +51,11 @@ Database/PetCareDB.sql
        providerName="System.Data.SqlClient" />
 </connectionStrings>
 Nếu máy sử dụng SQL Server instance khác, vui lòng chỉnh lại Data Source cho phù hợp với connectionString cho 2 database có tối ưu và không tối ưu
-
+```
 ### 4. Chạy ứng dụng
 - Mở Solution bằng **Visual Studio**
 - Nhấn **F5**
+
 ---
 
 ## 🌟 Chức năng hệ thống (System Features)
