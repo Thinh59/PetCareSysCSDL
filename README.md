@@ -164,22 +164,8 @@ Dự án được tổ chức theo hướng tách biệt rõ ràng giữa **Sour
 ### 📁 Source Code
 ```
 Source/
-└── PetCare/
 ├── PetCare.sln # Solution chính của dự án
 └── PetCare/ # Project WinForms (C#)
-├── DAO/ # Data Access Layer
-│ ├── DataProvider.cs # Kết nối & thực thi SQL
-│ └── ServiceDAL.cs # Giao tiếp Stored Procedure
-├── DTO/ # Data Transfer Objects
-├── BUS/ # Business Logic Layer
-├── GUI/ # Presentation Layer (WinForms)
-│ ├── KhachHang/ # Giao diện Khách hàng
-│ │ └── UC/ # User Controls (Giỏ hàng, Thanh toán…)
-│ ├── BacSi/ # Giao diện Bác sĩ
-│ ├── NhanVien/ # Giao diện Nhân viên
-│ └── QuanLy/ # Giao diện Quản lý
-├── Resources/ # Hình ảnh, icon
-└── App.config # Cấu hình chuỗi kết nối CSDL
 ```
 ---
 
