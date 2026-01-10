@@ -157,14 +157,12 @@ Database/PetCareDB.sql
 
 ## 📂 Cấu trúc thư mục
 
-## 📂 Cấu trúc thư mục (Project Structure)
-
 Dự án được tổ chức theo hướng tách biệt rõ ràng giữa **Source Code** và **Database Script**, phục vụ cho việc phân tích – thiết kế – tối ưu CSDL theo yêu cầu môn **CSC12002 – Cơ Sở Dữ Liệu Nâng Cao**.
 
 ---
 
 ### 📁 Source Code
-
+```
 Source/
 └── PetCare/
 ├── PetCare.sln # Solution chính của dự án
@@ -182,11 +180,11 @@ Source/
 │ └── QuanLy/ # Giao diện Quản lý
 ├── Resources/ # Hình ảnh, icon
 └── App.config # Cấu hình chuỗi kết nối CSDL
-
+```
 ---
 
 ### 🗄️ Database
-
+```
 database/
 ├── 03_GenData/ # Script phát sinh dữ liệu kiểm thử
 └── database_script_sql/ # Script thiết kế CSDL mức vật lý
@@ -196,7 +194,7 @@ database/
 ├── 04_Partition.sql # Partition dữ liệu (theo thời gian/chi nhánh)
 ├── 05_Procedures.sql # Stored Procedures
 └── 06_Query.sql # Các truy vấn thống kê & báo cáo
-
+```
 ---
 
 ## 👨‍💻 Tác giả
