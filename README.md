@@ -23,6 +23,39 @@ Dự án áp dụng:
 - Kiến trúc **3-Layer Architecture**
 - **SQL Server + Stored Procedures**
 ---
+## 🛠️ Cài đặt & Hướng dẫn (Installation)
+
+### 1. Clone dự án
+~~~bash
+git clone https://github.com/YourUsername/PetCare-Project.git
+~~~
+
+### 2. Cấu hình Database
+- Mở **SQL Server Management Studio**
+- Chạy file:
+~~~sql
+Database/PetCareDB.sql
+~~~
+
+### 3. Cấu hình kết nối Database
+
+Ứng dụng sử dụng **App.config** để cấu hình chuỗi kết nối.
+```xml
+<connectionStrings>
+  <add name="PetCareDB"
+       connectionString="Data Source=PHCT59MTJJ\MSSQLSERVER01;Initial Catalog=PetCareDB;Integrated Security=True;"
+       providerName="System.Data.SqlClient" />
+
+  <add name="PetCareDBOpt"
+       connectionString="Data Source=PHCT59MTJJ\MSSQLSERVER01;Initial Catalog=PetCareDBOpt;Integrated Security=True;"
+       providerName="System.Data.SqlClient" />
+</connectionStrings>
+Nếu máy sử dụng SQL Server instance khác, vui lòng chỉnh lại Data Source cho phù hợp với connectionString cho 2 database có tối ưu và không tối ưu
+
+### 4. Chạy ứng dụng
+- Mở Solution bằng **Visual Studio**
+- Nhấn **F5**
+---
 
 ## 🌟 Chức năng hệ thống (System Features)
 
@@ -146,9 +179,20 @@ git clone https://github.com/YourUsername/PetCare-Project.git
 Database/PetCareDB.sql
 ~~~
 
-### 3. Kết nối Database
-- Mở `App.config`
-- Cập nhật `ConnectionString` phù hợp với máy của bạn
+### 3. Cấu hình kết nối Database
+
+Ứng dụng sử dụng **App.config** để cấu hình chuỗi kết nối.
+```xml
+<connectionStrings>
+  <add name="PetCareDB"
+       connectionString="Data Source=PHCT59MTJJ\MSSQLSERVER01;Initial Catalog=PetCareDB;Integrated Security=True;"
+       providerName="System.Data.SqlClient" />
+
+  <add name="PetCareDBOpt"
+       connectionString="Data Source=PHCT59MTJJ\MSSQLSERVER01;Initial Catalog=PetCareDBOpt;Integrated Security=True;"
+       providerName="System.Data.SqlClient" />
+</connectionStrings>
+Nếu máy sử dụng SQL Server instance khác, vui lòng chỉnh lại Data Source cho phù hợp với connectionString cho 2 database có tối ưu và không tối ưu
 
 ### 4. Chạy ứng dụng
 - Mở Solution bằng **Visual Studio**
