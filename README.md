@@ -191,5 +191,3 @@ database/
 + 23120080 Nguyễn Ngọc Như Quỳnh
 
 ---
-
-⭐ Nếu bạn thấy dự án hữu ích, hãy cho repository một **Star**!
