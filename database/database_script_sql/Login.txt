@@ -1,0 +1,48 @@
+Hội viên
+user1
+123
+3I7IpBAYq
+
+QLCN
+NV00005   CN06
+123
+
+NV00005   CN01
+123
+
+NV00018    CN07
+123
+
+Bác sĩ
+NV00001
+123
+
+NV00004
+123
+
+NV00341
+
+Quản trị viên
+NV00003
+123
+
+Tiếp tân
+NV00002
+123
+
+Demo TT3: 0350004540
+
+Bán hàng
+NV00008
+123
+
+Khách hàng
+user3
+123
+cRwqDEu2Y3c4
+
+Quản lý công ty
+NV00074
+123
+
+

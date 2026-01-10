@@ -1,0 +1,446 @@
+﻿USE PetCareDB
+GO
+
+create table TAIKHOAN
+(
+	ID_TK int primary key identity(1,1),
+	TenDangNhap nvarchar(20) unique not null,
+	MatKhau nvarchar(50) not null,
+	LoaiTK nvarchar(50) not null 
+		check (LoaiTK in (N'Tiếp tân', N'Quản lý chi nhánh', N'Bác sĩ', N'Khách hàng', N'Hội viên', N'Quản lý công ty', N'Quản trị viên', N'Bán hàng'))
+)
+go
+
+CREATE TABLE CHINHANH (
+    MaCN        NVARCHAR(10) NOT NULL PRIMARY KEY,
+    TenCN       NVARCHAR(50) NOT NULL,
+    TimeMoCua   TIME NOT NULL,
+    TimeDongCua TIME NOT NULL,
+    DiaChiCN    NVARCHAR(100),
+    SDT_CN      VARCHAR(11) NOT NULL,
+
+    CONSTRAINT CK_CN_SDT CHECK (SDT_CN NOT LIKE '%[^0-9]%' AND LEN(SDT_CN) BETWEEN 10 AND 11),
+    CONSTRAINT CK_CN_GIO CHECK (TimeMoCua < TimeDongCua)
+);
+GO
+
+CREATE TABLE DICHVU
+(
+	MaDichVu NVARCHAR(10) PRIMARY KEY,
+	TenDV NVARCHAR(100) NOT NULL,
+	GiaTienDV INT NOT NULL
+);
+GO
+
+CREATE TABLE SANPHAM (
+    MaSP        NVARCHAR(10) NOT NULL PRIMARY KEY,
+    TenSP       NVARCHAR(100) NOT NULL,
+    LoaiSP      NVARCHAR(20) NOT NULL,
+    GiaBan      DECIMAL(18,2) NOT NULL,
+
+    CONSTRAINT CK_SP_Loai CHECK (LoaiSP IN (N'Thức ăn', N'Thuốc', N'Phụ kiện')),
+    CONSTRAINT CK_SP_Gia CHECK (GiaBan > 0)
+);
+GO
+
+CREATE TABLE GOITIEM (
+MaGoiTiem NVARCHAR(8) PRIMARY KEY,
+TenGoi    NVARCHAR(100),
+SoThang   INT NOT NULL,
+UuDai     FLOAT NOT NULL,
+
+CONSTRAINT CK_GOITIEM_SoThang CHECK (SoThang > 0),
+CONSTRAINT CK_GOITIEM_UuDai CHECK (UuDai BETWEEN 5 AND 15)
+);
+GO
+
+CREATE TABLE VACXIN (
+MaVacXin      NVARCHAR(8) PRIMARY KEY,
+TenVacXin     NVARCHAR(100),
+GiaTien       DECIMAL(10,2) NOT NULL,
+SoMuiTonKho   INT NOT NULL,
+
+CONSTRAINT CK_VACXIN_GiaTien CHECK (GiaTien > 0)
+);
+GO
+
+CREATE TABLE THUOC (
+MaThuoc     NVARCHAR(10) PRIMARY KEY,
+DonViTinh   NVARCHAR(20) NOT NULL,
+NgayHetHan  DATE NOT NULL,
+
+CONSTRAINT CK_THUOC_DVT CHECK (DonViTinh IN (N'ống', N'viên', N'hộp', N'mg', N'g')),
+CONSTRAINT FK_THUOC_SP FOREIGN KEY (MaThuoc) REFERENCES SANPHAM (MaSP) 
+);
+GO
+
+create table KHACHHANG
+(
+	MaKH nvarchar(10) primary key,
+	HoTen_KH nvarchar(100) not null,
+	SDT_KH varchar(11) not null,
+	NgaySinh_KH date not null,
+	GioiTinh_KH nvarchar(10) not null
+		check (GioiTinh_KH in (N'Nam', N'Nữ', N'Khác')),
+	Email_KH nvarchar(100),
+	Loai_KH nvarchar(50) check (Loai_KH in (N'Thường', N'Hội viên')),
+	ID_TK int not null,
+
+	constraint FK_KHACHHANG_TAIKHOAN foreign key (ID_TK)
+			references TAIKHOAN(ID_TK),
+
+	constraint CHK_KHACHHANG_SDT check (len(SDT_KH) between 10 and 11 
+										and SDT_KH not like '%[^0-9]%'),
+
+	constraint CHK_KHACHHANG_NgaySinh check (NgaySinh_KH <= getdate())
+)
+go
+
+CREATE TABLE NHANVIEN (
+    MaNV              NVARCHAR(10) NOT NULL PRIMARY KEY,
+    HoTenNV           NVARCHAR(50) NOT NULL,
+    NgaySinhNV        DATE NOT NULL,
+    ChucVu            NVARCHAR(50) NOT NULL,
+    NgayVaoLam        DATE NOT NULL,
+    Luong             DECIMAL(18,2) NOT NULL,
+    ChiNhanhLamViec   NVARCHAR(10) NOT NULL,
+	TrangThaiNV		  NVARCHAR(20) NOT NULL,
+	ID_TK       INT NOT NULL,
+
+    CONSTRAINT FK_NV_CN FOREIGN KEY (ChiNhanhLamViec)
+        REFERENCES CHINHANH(MaCN),
+	CONSTRAINT FK_NV_TDN FOREIGN KEY (ID_TK)
+        REFERENCES TAIKHOAN(ID_TK),
+
+    CONSTRAINT CK_NV_NgaySinh CHECK (NgaySinhNV < GETDATE()),
+    CONSTRAINT CK_NV_NgayVL CHECK (NgayVaoLam < GETDATE()),
+    CONSTRAINT CK_NV_Luong CHECK (Luong > 0),
+	--CONSTRAINT CK_NV_TrangThai CHECK (TrangThaiNV IN (N'Rảnh', N'Bận', N'Nghỉ phép')),
+
+);
+GO
+
+create table THUCUNG
+(
+	MaThuCung nvarchar(10) primary key,
+	TenThuCung nvarchar(100) not null,
+	LoaiThuCung nvarchar(100) not null,
+	Giong_TC nvarchar(100) not null,
+	NgaySinh_TC date,
+	GioiTinh_TC nvarchar(10) not null 
+		check(GioiTinh_TC in (N'Đực', N'Cái', N'Khác')),
+	TinhTrangSK nvarchar(255),
+	MaKH nvarchar(10) not null,
+
+	constraint FK_THUCUNG_KHACHHANG foreign key (MaKH) 
+			references KHACHHANG(MaKH),
+
+	constraint CHK_THUCUNG_NgaySinh check (NgaySinh_TC <= getdate())
+);
+go
+
+create table HOIVIEN
+(
+	MaKH nvarchar(10) primary key,
+	CapDo nvarchar(20) not null
+		check (CapDo in (N'Cơ bản', N'Thân thiết', N'VIP')),
+	DiemLoyalty int not null check (DiemLoyalty >= 0),
+
+	constraint FK_HOIVIEN_KHACHHANG foreign key (MaKH)
+			references KHACHHANG(MaKH)
+);
+go
+
+CREATE TABLE LS_DIEUDONG (
+    STT          INT NOT NULL,
+    MaNV          NVARCHAR(10) NOT NULL,
+    NgayDieuDong  DATE NOT NULL,
+    ChiNhanhCu    NVARCHAR(10) NOT NULL,
+    ChiNhanhMoi   NVARCHAR(10) NOT NULL,
+
+    CONSTRAINT PK_LSDD PRIMARY KEY (STT, MaNV),
+
+    CONSTRAINT FK_LSDD_NV FOREIGN KEY (MaNV)
+        REFERENCES NHANVIEN(MaNV),
+
+    CONSTRAINT FK_LSDD_CN_CU FOREIGN KEY (ChiNhanhCu)
+        REFERENCES CHINHANH(MaCN),
+
+    CONSTRAINT FK_LSDD_CN_MOI FOREIGN KEY (ChiNhanhMoi)
+        REFERENCES CHINHANH(MaCN),
+
+    CONSTRAINT CK_LSDD_Ngay CHECK (NgayDieuDong < GETDATE()),
+    CONSTRAINT CK_LSDD_KhacCN CHECK (ChiNhanhCu <> ChiNhanhMoi)
+);
+GO
+
+CREATE TABLE LS_DV (
+    MaLSDV        NVARCHAR(10) PRIMARY KEY,
+    MaKH          NVARCHAR(10) NOT NULL,
+    MaDichVu      NVARCHAR(10) NOT NULL,
+    TrangThaiGD   NVARCHAR(50),
+    NgayDatTruoc  DATE NULL,  -- Dùng cột này làm mốc thời gian
+    MaCN          NVARCHAR(10) NULL, -- Bắt buộc có để lọc theo Chi nhánh
+
+    CONSTRAINT FK_LSDV_KHACHHANG FOREIGN KEY (MaKH) REFERENCES KHACHHANG(MaKH),
+    CONSTRAINT FK_LSDV_DICHVU FOREIGN KEY (MaDichVu) REFERENCES DICHVU(MaDichVu),
+    CONSTRAINT FK_LSDV_CHINHANH FOREIGN KEY (MaCN) REFERENCES CHINHANH(MaCN),
+    CONSTRAINT CK_LSDV_NgayDatTruoc CHECK (NgayDatTruoc IS NULL OR NgayDatTruoc >= '2000-01-01')
+);
+GO
+
+CREATE TABLE ND_GOITIEM (
+MaGoiTiem NVARCHAR(8),
+MaVacXin  NVARCHAR(8),
+SoMui     INT NOT NULL,
+
+PRIMARY KEY (MaGoiTiem, MaVacXin),
+
+CONSTRAINT FK_NDGoiTiem_GoiTiem FOREIGN KEY (MaGoiTiem)
+REFERENCES GOITIEM(MaGoiTiem),
+
+CONSTRAINT FK_NDGoiTiem_VacXin FOREIGN KEY (MaVacXin)
+REFERENCES VACXIN(MaVacXin),
+
+CONSTRAINT CK_NDGOITIEM_SoMui CHECK (SoMui > 0)
+);
+GO
+
+CREATE TABLE LS_DANGKY (
+MaGoiTiem  NVARCHAR(8),
+MaKH       NVARCHAR(10),
+NgayDangKy DATE,
+
+PRIMARY KEY (MaGoiTiem, MaKH, NgayDangKy),
+
+CONSTRAINT FK_LSDK_GoiTiem FOREIGN KEY (MaGoiTiem)
+    REFERENCES GOITIEM(MaGoiTiem),
+
+CONSTRAINT FK_LSDK_KhachHang FOREIGN KEY (MaKH)
+    REFERENCES KHACHHANG(MaKH),
+
+CONSTRAINT CK_LSDK_Ngay CHECK (NgayDangKy >= '2000-01-01')
+);
+GO
+
+create table CHITIEUNAM
+(
+	MaKH nvarchar(10) not null,
+	Nam int not null,
+	ChiTieu decimal(18,2) not null check (ChiTieu >= 0),
+
+	primary key (MaKH, Nam),
+	constraint FK_CHITIEUNAM_HOIVIEN foreign key (MaKH)
+			references HOIVIEN(MaKH)
+)
+go
+
+CREATE TABLE LS_DVTIEMPHONG (
+    MaLSDVTP      NVARCHAR(10) PRIMARY KEY,
+    BacSiPhuTrach NVARCHAR(10),
+    MaGoiTiem     NVARCHAR(8),
+    LoaiVacXin    NVARCHAR(8) NOT NULL,
+    LieuLuong     NVARCHAR(50),
+    NgayTiem      DATE,
+    MaThuCung     NVARCHAR(10) NOT NULL,
+    ThoiGianSD    DATE, -- Lưu ý: Bảng con này giữ ThoiGianSD cũng được nếu muốn lưu ngày tiêm thực tế khác ngày hẹn
+
+    CONSTRAINT FK_LSDVTP_BacSi FOREIGN KEY (BacSiPhuTrach) REFERENCES NHANVIEN(MaNV),
+    CONSTRAINT FK_LSDVTP_GoiTiem FOREIGN KEY (MaGoiTiem) REFERENCES GOITIEM(MaGoiTiem),
+    CONSTRAINT FK_LSDVTP_VacXin FOREIGN KEY (LoaiVacXin) REFERENCES VACXIN(MaVacXin),
+    CONSTRAINT FK_LSDVTP_ThuCung FOREIGN KEY (MaThuCung) REFERENCES THUCUNG(MaThuCung),
+    CONSTRAINT FK_LSDVTP_LSDV FOREIGN KEY (MaLSDVTP) REFERENCES LS_DV(MaLSDV)
+);
+GO
+
+
+CREATE TABLE LS_DVKHAMBENH (
+    MaLSDVKB      NVARCHAR(10) PRIMARY KEY,
+    BacSiPhuTrach NVARCHAR(10),
+    NgayHen       DATE,
+    MaThuCung     NVARCHAR(10) NOT NULL,
+    NgayKham      DATE,
+    ThoiGianSD	  DATE,
+
+    CONSTRAINT FK_LSDKB_ThuCung FOREIGN KEY (MaThuCung) REFERENCES THUCUNG(MaThuCung),
+    CONSTRAINT FK_LSDKB_BacSi FOREIGN KEY (BacSiPhuTrach) REFERENCES NHANVIEN(MaNV),
+    CONSTRAINT FK_LSDVKB_LSDV FOREIGN KEY (MaLSDVKB) REFERENCES LS_DV(MaLSDV)
+);
+GO
+
+CREATE TABLE TRIEUCHUNG (
+MaLSKB      NVARCHAR(10) PRIMARY KEY,
+TrieuChung  NVARCHAR(100),
+
+CONSTRAINT FK_TC_LSKB FOREIGN KEY (MaLSKB)
+    REFERENCES LS_DVKHAMBENH(MaLSDVKB)
+);
+GO
+
+CREATE TABLE CHUANDOAN (
+MaLSKB      NVARCHAR(10) PRIMARY KEY,
+ChuanDoan   NVARCHAR(100),
+
+CONSTRAINT FK_CD_LSKB FOREIGN KEY (MaLSKB)
+    REFERENCES LS_DVKHAMBENH(MaLSDVKB)
+);
+GO
+
+CREATE TABLE CT_SPCN (
+    MaCN      NVARCHAR(10) NOT NULL,
+    MaSP      NVARCHAR(10) NOT NULL,
+    GiaSPCN   DECIMAL(18,2) NOT NULL,
+	SLTonKho  INT NOT NULL,
+
+    CONSTRAINT PK_CTSPCN PRIMARY KEY (MaCN, MaSP),
+
+    CONSTRAINT FK_CTSPCN_CN FOREIGN KEY (MaCN)
+        REFERENCES CHINHANH(MaCN),
+
+    CONSTRAINT FK_CTSPCN_SP FOREIGN KEY (MaSP)
+        REFERENCES SANPHAM(MaSP),
+
+    CONSTRAINT CK_CTSPCN_Gia CHECK (GiaSPCN > 0),
+	CONSTRAINT CK_CTSPCN_SLTonKho CHECK (SLTonKho >= 0)
+);
+GO
+
+CREATE TABLE LS_DVMUAHANG (
+    MaLSDVMH    NVARCHAR(10) NOT NULL PRIMARY KEY,
+    HinhThucMH  NVARCHAR(10) NOT NULL,
+	CONSTRAINT FK_LSDVMH_LSDV FOREIGN KEY (MaLSDVMH) REFERENCES LS_DV(MaLSDV)
+);
+GO
+
+CREATE TABLE CT_MUAHANG (
+    MaLSDVMH    NVARCHAR(10) NOT NULL,
+    MaSP        NVARCHAR(10) NOT NULL,
+    SoLuongSP   INT NOT NULL,
+	ThanhTienMH DECIMAL(18,2) NULL,
+    CONSTRAINT PK_CT_MH PRIMARY KEY (MaLSDVMH, MaSP),
+    CONSTRAINT FK_CT_MH_LSDVMH FOREIGN KEY (MaLSDVMH) REFERENCES LS_DVMUAHANG(MaLSDVMH),
+    CONSTRAINT FK_CT_MH_SP FOREIGN KEY (MaSP) REFERENCES SANPHAM(MaSP)
+);
+GO
+
+CREATE TABLE KHUYENMAI
+(
+	MaKM NVARCHAR(10) PRIMARY KEY,
+	LoaiKM NVARCHAR(20) NOT NULL,
+	GiaKM INT NOT NULL
+);
+GO
+
+CREATE TABLE HOADON
+(
+	MaHD NVARCHAR(10) PRIMARY KEY,
+	NgayLap DATE NOT NULL,
+	NV_Lap NVARCHAR(10),
+	TienTruocKM INT NOT NULL,
+	TienThanhToan INT NOT NULL,
+	HinhThucPay NVARCHAR(50) NOT NULL,
+	TrangThaiHD NVARCHAR(20) NOT NULL,
+	CongLoyalty INT NOT NULL,
+	MaKH NVARCHAR(10) NOT NULL,
+	MaCN NVARCHAR(10) NOT NULL,
+
+	FOREIGN KEY (MaKH) REFERENCES KHACHHANG(MaKH),
+	FOREIGN KEY (NV_Lap) REFERENCES NHANVIEN(MaNV),
+	FOREIGN KEY (MaCN) REFERENCES CHINHANH(MaCN)
+);
+GO
+
+CREATE TABLE CT_HOADON
+(
+	MaHD NVARCHAR(10) NOT NULL,
+	MaLSGD NVARCHAR(10) NOT NULL,
+	TongPhiDV INT NOT NULL,
+	Pet NVARCHAR(10),
+	PRIMARY KEY (MaHD, MaLSGD),
+	FOREIGN KEY (MaHD) REFERENCES HOADON(MaHD),
+	FOREIGN KEY (MaLSGD) REFERENCES LS_DV(MaLSDV)
+);
+GO
+
+CREATE TABLE CT_KHUYENMAI
+(
+	MaHD NVARCHAR(10) NOT NULL,
+	MaKM NVARCHAR(10) NOT NULL,
+	SoLuongDung INT NOT NULL,
+	TienKM INT NOT NULL,
+
+	PRIMARY KEY (MaHD, MaKM),
+
+	FOREIGN KEY (MaHD) REFERENCES HOADON(MaHD),
+	FOREIGN KEY (MaKM) REFERENCES KHUYENMAI(MaKM)
+);
+GO
+
+CREATE TABLE CHINHANH_DV
+(
+	MaCN NVARCHAR(10) NOT NULL,
+	MaDichVu NVARCHAR(10) NOT NULL,
+	GiaDV_CN INT,
+	TrangThaiDV NVARCHAR(20) NOT NULL
+	PRIMARY KEY (MaCN, MaDichVu),
+	FOREIGN KEY (MaCN) REFERENCES CHINHANH(MaCN),
+	FOREIGN KEY (MaDichVu) REFERENCES DICHVU(MaDichVu)
+);
+GO
+
+CREATE TABLE TOA_THUOC (
+MaThuoc   NVARCHAR(10),
+MaLSDV    NVARCHAR(10),
+SoLuongThuoc INT NOT NULL,
+LieuDung  NVARCHAR(50),
+ThanhTien DECIMAL(10,2) NOT NULL,
+
+PRIMARY KEY (MaThuoc, MaLSDV),
+
+CONSTRAINT FK_TOATHUOC_Thuoc FOREIGN KEY (MaThuoc)
+    REFERENCES THUOC(MaThuoc),
+
+CONSTRAINT FK_TOATHUOC_LSDV FOREIGN KEY (MaLSDV)
+    REFERENCES LS_DVKHAMBENH(MaLSDVKB),
+
+CONSTRAINT CK_TOATHUOC_SoLuong CHECK (SoLuongThuoc > 0),
+CONSTRAINT CK_TOATHUOC_ThanhTien CHECK (ThanhTien > 0)
+);
+GO
+
+CREATE TABLE DANHGIA
+(
+	MaDG NVARCHAR(10) PRIMARY KEY,
+	DiemDV TINYINT CHECK (DiemDV BETWEEN 1 AND 5),
+	DiemNV TINYINT CHECK (DiemNV BETWEEN 1 AND 5),
+	MucDoHaiLong TINYINT CHECK (MucDoHaiLong BETWEEN 1 AND 5),
+	BinhLuan NVARCHAR(500) NULL,
+	MaDV NVARCHAR(10) NOT NULL,
+	MaKH NVARCHAR(10) NOT NULL,
+	FOREIGN KEY (MaDV) REFERENCES DICHVU(MaDichVu),
+	FOREIGN KEY (MaKH) REFERENCES KHACHHANG(MaKH),
+);
+GO
+
+/*
+---- 1. Xóa tất cả FOREIGN KEY constraints
+DECLARE @sql NVARCHAR(MAX) = N'';
+
+SELECT @sql += N'ALTER TABLE ' 
+    + QUOTENAME(OBJECT_SCHEMA_NAME(parent_object_id)) + '.' 
+    + QUOTENAME(OBJECT_NAME(parent_object_id))
+    + ' DROP CONSTRAINT ' + QUOTENAME(name) + ';'
+FROM sys.foreign_keys;
+
+EXEC sp_executesql @sql;
+
+---- 2. Xóa tất cả TABLES
+DECLARE @sql2 NVARCHAR(MAX) = N'';
+
+SELECT @sql2 += N'DROP TABLE ' 
+    + QUOTENAME(TABLE_SCHEMA) + '.' + QUOTENAME(TABLE_NAME) + ';'
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_TYPE = 'BASE TABLE';
+
+EXEC sp_executesql @sql2;
+*/

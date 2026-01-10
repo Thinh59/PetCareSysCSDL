@@ -1,0 +1,1167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{893A2B10-627B-41E0-B975-32FB7A3720A3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PetCare</RootNamespace>
+    <AssemblyName>PetCare</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BacSi\BacSi_main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BacSi\BacSi_main.Designer.cs">
+      <DependentUpon>BacSi_main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BacSi\BS_LSK.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BacSi\BS_LSK.Designer.cs">
+      <DependentUpon>BS_LSK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BacSi\BS_QLGT.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BacSi\BS_QLGT.Designer.cs">
+      <DependentUpon>BS_QLGT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BacSi\BS_QLHSKB.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BacSi\BS_QLHSKB.Designer.cs">
+      <DependentUpon>BS_QLHSKB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BacSi\BS_TaoTT.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BacSi\BS_TaoTT.Designer.cs">
+      <DependentUpon>BS_TaoTT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BacSi\BS_TCVC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BacSi\BS_TCVC.Designer.cs">
+      <DependentUpon>BS_TCVC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BacSi\BS_TPL.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BacSi\BS_TPL.Designer.cs">
+      <DependentUpon>BS_TPL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BacSi\BS_XDG.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BacSi\BS_XDG.Designer.cs">
+      <DependentUpon>BS_XDG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BacSi\BS_XemHSKB.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BacSi\BS_XemHSKB.Designer.cs">
+      <DependentUpon>BS_XemHSKB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BanHang\BH_BHTT.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BanHang\BH_BHTT.Designer.cs">
+      <DependentUpon>BH_BHTT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BanHang\BH_HTK.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BanHang\BH_HTK.Designer.cs">
+      <DependentUpon>BH_HTK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BanHang\BH_main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BanHang\BH_main.Designer.cs">
+      <DependentUpon>BH_main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BanHang\BH_QLDDH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BanHang\BH_QLDDH.Designer.cs">
+      <DependentUpon>BH_QLDDH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BanHang\BH_TCKH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BanHang\BH_TCKH.Designer.cs">
+      <DependentUpon>BH_TCKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BanHang\BH_TTHD.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BanHang\BH_TTHD.Designer.cs">
+      <DependentUpon>BH_TTHD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DungChung\ALL_LogIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DungChung\ALL_LogIn.Designer.cs">
+      <DependentUpon>ALL_LogIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DungChung\All_ThongTinCaNhan_UC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DungChung\All_ThongTinCaNhan_UC.Designer.cs">
+      <DependentUpon>All_ThongTinCaNhan_UC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DungChung\Class\Utils.cs" />
+    <Compile Include="HoiVien\HV_main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HoiVien\HV_main.Designer.cs">
+      <DependentUpon>HV_main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HoiVien\UC_con\UC_HV_DiemLoyalty.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HoiVien\UC_con\UC_HV_DiemLoyalty.Designer.cs">
+      <DependentUpon>UC_HV_DiemLoyalty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HoiVien\UC_con\UC_HV_ThongKeChiTieu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HoiVien\UC_con\UC_HV_ThongKeChiTieu.Designer.cs">
+      <DependentUpon>UC_HV_ThongKeChiTieu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HoiVien\UC_con\UC_HV_ThongTinHoiVien.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HoiVien\UC_con\UC_HV_ThongTinHoiVien.Designer.cs">
+      <DependentUpon>UC_HV_ThongTinHoiVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\KH_main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KhachHang\KH_main.Designer.cs">
+      <DependentUpon>KH_main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_ChiNhanh.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_ChiNhanh.Designer.cs">
+      <DependentUpon>UC_KH_ChiNhanh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_DangKyHoiVien.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_DangKyHoiVien.Designer.cs">
+      <DependentUpon>UC_KH_DangKyHoiVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_DanhGiaDichVu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_DanhGiaDichVu.Designer.cs">
+      <DependentUpon>UC_KH_DanhGiaDichVu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_DatDichVu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_DatDichVu.Designer.cs">
+      <DependentUpon>UC_KH_DatDichVu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_DatGoiTiem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_DatGoiTiem.Designer.cs">
+      <DependentUpon>UC_KH_DatGoiTiem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_LSDichVu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_LSDichVu.Designer.cs">
+      <DependentUpon>UC_KH_LSDichVu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_MuaHangTrucTuyen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_MuaHangTrucTuyen.Designer.cs">
+      <DependentUpon>UC_KH_MuaHangTrucTuyen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_QLThuCung.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_QLThuCung.Designer.cs">
+      <DependentUpon>UC_KH_QLThuCung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_ThanhToanHoaDon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_ThanhToanHoaDon.Designer.cs">
+      <DependentUpon>UC_KH_ThanhToanHoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_ThongTinCaNhan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_ThongTinCaNhan.Designer.cs">
+      <DependentUpon>UC_KH_ThongTinCaNhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_TraCuuLichBacSi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_TraCuuLichBacSi.Designer.cs">
+      <DependentUpon>UC_KH_TraCuuLichBacSi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_XemKhuyenMai.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC\UC_KH_XemKhuyenMai.Designer.cs">
+      <DependentUpon>UC_KH_XemKhuyenMai.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_ChiTietHoaDon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_ChiTietHoaDon.Designer.cs">
+      <DependentUpon>UC_KH_ChiTietHoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_DoiMatKhau.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_DoiMatKhau.Designer.cs">
+      <DependentUpon>UC_KH_DoiMatKhau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_GioHang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_GioHang.Designer.cs">
+      <DependentUpon>UC_KH_GioHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_GoiTiem_ChonMuiTiemDau.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_GoiTiem_ChonMuiTiemDau.Designer.cs">
+      <DependentUpon>UC_KH_GoiTiem_ChonMuiTiemDau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_LSHoaDon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_LSHoaDon.Designer.cs">
+      <DependentUpon>UC_KH_LSHoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_LSKhamBenh.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_LSKhamBenh.Designer.cs">
+      <DependentUpon>UC_KH_LSKhamBenh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_LSTiemPhong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_LSTiemPhong.Designer.cs">
+      <DependentUpon>UC_KH_LSTiemPhong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_SuaThuCung.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_SuaThuCung.Designer.cs">
+      <DependentUpon>UC_KH_SuaThuCung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_TaoGoiTiem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_TaoGoiTiem.Designer.cs">
+      <DependentUpon>UC_KH_TaoGoiTiem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_ThanhToan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_ThanhToan.Designer.cs">
+      <DependentUpon>UC_KH_ThanhToan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_ThemThuCung.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_ThemThuCung.Designer.cs">
+      <DependentUpon>UC_KH_ThemThuCung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_XacNhanDKHV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_XacNhanDKHV.Designer.cs">
+      <DependentUpon>UC_KH_XacNhanDKHV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_XemDSVacxin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_XemDSVacxin.Designer.cs">
+      <DependentUpon>UC_KH_XemDSVacxin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_XemToaThuoc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_XemToaThuoc.Designer.cs">
+      <DependentUpon>UC_KH_XemToaThuoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_XemVaHuyDichVu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KhachHang\UC_con\UC_KH_XemVaHuyDichVu.Designer.cs">
+      <DependentUpon>UC_KH_XemVaHuyDichVu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QLChiNhanh\Class\Class_QLCN10_DSHD.cs" />
+    <Compile Include="QLChiNhanh\Class\Class_QLCN11_DSLDGDD.cs" />
+    <Compile Include="QLChiNhanh\Class\Class_QLCN1_DoanhThuDV.cs" />
+    <Compile Include="QLChiNhanh\Class\Class_QLCN2_DSNV.cs" />
+    <Compile Include="QLChiNhanh\Class\Class_QLCN4_TKSPK.cs" />
+    <Compile Include="QLChiNhanh\Class\Class_QLCN4_TKThuoc.cs" />
+    <Compile Include="QLChiNhanh\Class\Class_QLCN4_TKVacxin.cs" />
+    <Compile Include="QLChiNhanh\Class\Class_QLCN5_DSSP.cs" />
+    <Compile Include="QLChiNhanh\Class\Class_QLCN6_DSThuCung.cs" />
+    <Compile Include="QLChiNhanh\Class\Class_QLCN6_LichSu.cs" />
+    <Compile Include="QLChiNhanh\Class\Class_QLCN7_DSKH.cs" />
+    <Compile Include="QLChiNhanh\Class\Class_QLCN8_DSKM.cs" />
+    <Compile Include="QLChiNhanh\Class\Class_QLCN9_DSDV.cs" />
+    <Compile Include="QLChiNhanh\QLCN_main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QLChiNhanh\QLCN_main.Designer.cs">
+      <DependentUpon>QLCN_main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN10_DSHoaDon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN10_DSHoaDon.Designer.cs">
+      <DependentUpon>Usc_QLCN10_DSHoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN11_TKDV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN11_TKDV.Designer.cs">
+      <DependentUpon>Usc_QLCN11_TKDV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN1_TKDoanhThu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN1_TKDoanhThu.Designer.cs">
+      <DependentUpon>Usc_QLCN1_TKDoanhThu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN2_QLNV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN2_QLNV.Designer.cs">
+      <DependentUpon>Usc_QLCN2_QLNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN3_HSNV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN3_HSNV.Designer.cs">
+      <DependentUpon>Usc_QLCN3_HSNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN4_TKSP.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN4_TKSP.Designer.cs">
+      <DependentUpon>Usc_QLCN4_TKSP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN4_TKSPKhac.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN4_TKSPKhac.Designer.cs">
+      <DependentUpon>Usc_QLCN4_TKSPKhac.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN4_TKThuoc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN4_TKThuoc.Designer.cs">
+      <DependentUpon>Usc_QLCN4_TKThuoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN4_TKVacxin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN4_TKVacxin.Designer.cs">
+      <DependentUpon>Usc_QLCN4_TKVacxin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN5_QLSP.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN5_QLSP.Designer.cs">
+      <DependentUpon>Usc_QLCN5_QLSP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN6_DSPet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN6_DSPet.Designer.cs">
+      <DependentUpon>Usc_QLCN6_DSPet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN6_LichSu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN6_LichSu.Designer.cs">
+      <DependentUpon>Usc_QLCN6_LichSu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN7_TKKH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN7_TKKH.Designer.cs">
+      <DependentUpon>Usc_QLCN7_TKKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN9_QLDV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QLChiNhanh\Usc\Usc_QLCN9_QLDV.Designer.cs">
+      <DependentUpon>Usc_QLCN9_QLDV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Class\Class_ALL_DSDV.cs" />
+    <Compile Include="QuanLyCongTy\Class\Class_QLCT10_QLTC.cs" />
+    <Compile Include="QuanLyCongTy\Class\Class_QLCT11_LSTP.cs" />
+    <Compile Include="QuanLyCongTy\Class\Class_QLCT12_DSHD.cs" />
+    <Compile Include="QuanLyCongTy\Class\Class_QLCT13_LSDV.cs" />
+    <Compile Include="QuanLyCongTy\Class\Class_QLCT14_TKHV.cs" />
+    <Compile Include="QuanLyCongTy\Class\Class_QLCT15_LSDD.cs" />
+    <Compile Include="QuanLyCongTy\Class\Class_QLCT1_DoanhThu.cs" />
+    <Compile Include="QuanLyCongTy\Class\Class_QLCT2_QLCN.cs" />
+    <Compile Include="QuanLyCongTy\Class\Class_QLCT3_HSCN.cs" />
+    <Compile Include="QuanLyCongTy\Class\Class_QLCT4_QLNV.cs" />
+    <Compile Include="QuanLyCongTy\Class\Class_QLCT5_QLKM.cs" />
+    <Compile Include="QuanLyCongTy\Class\Class_QLCT6_QLDV.cs" />
+    <Compile Include="QuanLyCongTy\Class\Class_QLCT7_HSNV.cs" />
+    <Compile Include="QuanLyCongTy\Class\Class_QLCT8_TKSP.cs" />
+    <Compile Include="QuanLyCongTy\Class\Class_QLCT9_TKKH.cs" />
+    <Compile Include="QuanLyCongTy\QLCT_main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyCongTy\QLCT_main.Designer.cs">
+      <DependentUpon>QLCT_main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_ALL_DSDV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_ALL_DSDV.Designer.cs">
+      <DependentUpon>Usc_ALL_DSDV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT10_QLTC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT10_QLTC.Designer.cs">
+      <DependentUpon>Usc_QLCT10_QLTC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT11_LSTP.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT11_LSTP.Designer.cs">
+      <DependentUpon>Usc_QLCT11_LSTP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT12_DSHD.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT12_DSHD.Designer.cs">
+      <DependentUpon>Usc_QLCT12_DSHD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT13_LSDV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT13_LSDV.Designer.cs">
+      <DependentUpon>Usc_QLCT13_LSDV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT14_TKHV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT14_TKHV.Designer.cs">
+      <DependentUpon>Usc_QLCT14_TKHV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT15_LSDD.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT15_LSDD.Designer.cs">
+      <DependentUpon>Usc_QLCT15_LSDD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT1_DoanhThu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT1_DoanhThu.Designer.cs">
+      <DependentUpon>Usc_QLCT1_DoanhThu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT2_QLCN.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT2_QLCN.Designer.cs">
+      <DependentUpon>Usc_QLCT2_QLCN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT3_HSCN.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT3_HSCN.Designer.cs">
+      <DependentUpon>Usc_QLCT3_HSCN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT4_QLNV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT4_QLNV.Designer.cs">
+      <DependentUpon>Usc_QLCT4_QLNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT5_QLKM.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT5_QLKM.Designer.cs">
+      <DependentUpon>Usc_QLCT5_QLKM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT6_QLDV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT6_QLDV.Designer.cs">
+      <DependentUpon>Usc_QLCT6_QLDV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT7_HSNV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT7_HSNV.Designer.cs">
+      <DependentUpon>Usc_QLCT7_HSNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT8_TKSP.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT8_TKSP.Designer.cs">
+      <DependentUpon>Usc_QLCT8_TKSP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT9_TKKH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyCongTy\Usc\Usc_QLCT9_TKKH.Designer.cs">
+      <DependentUpon>Usc_QLCT9_TKKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanTriVien\QTV_main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanTriVien\QTV_main.Designer.cs">
+      <DependentUpon>QTV_main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanTriVien\Usc\Usc_QTV1_QLTK.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanTriVien\Usc\Usc_QTV1_QLTK.Designer.cs">
+      <DependentUpon>Usc_QTV1_QLTK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TiepTan\Class\Class_TT3_DSKhamBenh.cs" />
+    <Compile Include="TiepTan\Class\Class_TT4_DSTiemPhong.cs" />
+    <Compile Include="TiepTan\Class\Class_TT6_ChiTietSP.cs" />
+    <Compile Include="TiepTan\Class\Class_TT6_HoaDon.cs" />
+    <Compile Include="TiepTan\Class\Class_TT7_DSHDLap.cs" />
+    <Compile Include="TiepTan\Class\Class_TT8_DSLSDD.cs" />
+    <Compile Include="ServiceDAL.cs" />
+    <Compile Include="TiepTan\Frm_TT6_ChiTiet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TiepTan\Frm_TT6_ChiTiet.Designer.cs">
+      <DependentUpon>Frm_TT6_ChiTiet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TiepTan\TT_main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TiepTan\TT_main.Designer.cs">
+      <DependentUpon>TT_main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT10_LSKham.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT10_LSKham.Designer.cs">
+      <DependentUpon>Usc_TT10_LSKham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT10_LSTiemPhong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT10_LSTiemPhong.Designer.cs">
+      <DependentUpon>Usc_TT10_LSTiemPhong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT10_TraCuuThuCung.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT10_TraCuuThuCung.Designer.cs">
+      <DependentUpon>Usc_TT10_TraCuuThuCung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT2_DKHVKH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT2_DKHVKH.Designer.cs">
+      <DependentUpon>Usc_TT2_DKHVKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT3_XNKhamBenh.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT3_XNKhamBenh.Designer.cs">
+      <DependentUpon>Usc_TT3_XNKhamBenh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT4_XNTiemPhong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT4_XNTiemPhong.Designer.cs">
+      <DependentUpon>Usc_TT4_XNTiemPhong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT5_DKGoiTiemKH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT5_DKGoiTiemKH.Designer.cs">
+      <DependentUpon>Usc_TT5_DKGoiTiemKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT6_LapHoaDon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT6_LapHoaDon.Designer.cs">
+      <DependentUpon>Usc_TT6_LapHoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT7_XemHDLap.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT7_XemHDLap.Designer.cs">
+      <DependentUpon>Usc_TT7_XemHDLap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT8_LSDieuDong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT8_LSDieuDong.Designer.cs">
+      <DependentUpon>Usc_TT8_LSDieuDong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT9_DatLichTaiQuay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT9_DatLichTaiQuay.Designer.cs">
+      <DependentUpon>Usc_TT9_DatLichTaiQuay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT_DKTKKH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TiepTan\Usc\Usc_TT_DKTKKH.Designer.cs">
+      <DependentUpon>Usc_TT_DKTKKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserSession.cs" />
+    <EmbeddedResource Include="BacSi\BacSi_main.resx">
+      <DependentUpon>BacSi_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BacSi\BS_LSK.resx">
+      <DependentUpon>BS_LSK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BacSi\BS_QLGT.resx">
+      <DependentUpon>BS_QLGT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BacSi\BS_QLHSKB.resx">
+      <DependentUpon>BS_QLHSKB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BacSi\BS_TaoTT.resx">
+      <DependentUpon>BS_TaoTT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BacSi\BS_TCVC.resx">
+      <DependentUpon>BS_TCVC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BacSi\BS_TPL.resx">
+      <DependentUpon>BS_TPL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BacSi\BS_XDG.resx">
+      <DependentUpon>BS_XDG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BacSi\BS_XemHSKB.resx">
+      <DependentUpon>BS_XemHSKB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BanHang\BH_BHTT.resx">
+      <DependentUpon>BH_BHTT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BanHang\BH_HTK.resx">
+      <DependentUpon>BH_HTK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BanHang\BH_main.resx">
+      <DependentUpon>BH_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BanHang\BH_QLDDH.resx">
+      <DependentUpon>BH_QLDDH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BanHang\BH_TCKH.resx">
+      <DependentUpon>BH_TCKH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BanHang\BH_TTHD.resx">
+      <DependentUpon>BH_TTHD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DungChung\ALL_LogIn.resx">
+      <DependentUpon>ALL_LogIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DungChung\All_ThongTinCaNhan_UC.resx">
+      <DependentUpon>All_ThongTinCaNhan_UC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HoiVien\HV_main.resx">
+      <DependentUpon>HV_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HoiVien\UC_con\UC_HV_DiemLoyalty.resx">
+      <DependentUpon>UC_HV_DiemLoyalty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HoiVien\UC_con\UC_HV_ThongKeChiTieu.resx">
+      <DependentUpon>UC_HV_ThongKeChiTieu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HoiVien\UC_con\UC_HV_ThongTinHoiVien.resx">
+      <DependentUpon>UC_HV_ThongTinHoiVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\KH_main.resx">
+      <DependentUpon>KH_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC\UC_KH_ChiNhanh.resx">
+      <DependentUpon>UC_KH_ChiNhanh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC\UC_KH_DangKyHoiVien.resx">
+      <DependentUpon>UC_KH_DangKyHoiVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC\UC_KH_DanhGiaDichVu.resx">
+      <DependentUpon>UC_KH_DanhGiaDichVu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC\UC_KH_DatDichVu.resx">
+      <DependentUpon>UC_KH_DatDichVu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC\UC_KH_DatGoiTiem.resx">
+      <DependentUpon>UC_KH_DatGoiTiem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC\UC_KH_LSDichVu.resx">
+      <DependentUpon>UC_KH_LSDichVu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC\UC_KH_MuaHangTrucTuyen.resx">
+      <DependentUpon>UC_KH_MuaHangTrucTuyen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC\UC_KH_QLThuCung.resx">
+      <DependentUpon>UC_KH_QLThuCung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC\UC_KH_ThanhToanHoaDon.resx">
+      <DependentUpon>UC_KH_ThanhToanHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC\UC_KH_ThongTinCaNhan.resx">
+      <DependentUpon>UC_KH_ThongTinCaNhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC\UC_KH_TraCuuLichBacSi.resx">
+      <DependentUpon>UC_KH_TraCuuLichBacSi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC\UC_KH_XemKhuyenMai.resx">
+      <DependentUpon>UC_KH_XemKhuyenMai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC_con\UC_KH_ChiTietHoaDon.resx">
+      <DependentUpon>UC_KH_ChiTietHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC_con\UC_KH_DoiMatKhau.resx">
+      <DependentUpon>UC_KH_DoiMatKhau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC_con\UC_KH_GioHang.resx">
+      <DependentUpon>UC_KH_GioHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC_con\UC_KH_GoiTiem_ChonMuiTiemDau.resx">
+      <DependentUpon>UC_KH_GoiTiem_ChonMuiTiemDau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC_con\UC_KH_LSHoaDon.resx">
+      <DependentUpon>UC_KH_LSHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC_con\UC_KH_LSKhamBenh.resx">
+      <DependentUpon>UC_KH_LSKhamBenh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC_con\UC_KH_LSTiemPhong.resx">
+      <DependentUpon>UC_KH_LSTiemPhong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC_con\UC_KH_SuaThuCung.resx">
+      <DependentUpon>UC_KH_SuaThuCung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC_con\UC_KH_TaoGoiTiem.resx">
+      <DependentUpon>UC_KH_TaoGoiTiem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC_con\UC_KH_ThanhToan.resx">
+      <DependentUpon>UC_KH_ThanhToan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC_con\UC_KH_ThemThuCung.resx">
+      <DependentUpon>UC_KH_ThemThuCung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC_con\UC_KH_XacNhanDKHV.resx">
+      <DependentUpon>UC_KH_XacNhanDKHV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC_con\UC_KH_XemDSVacxin.resx">
+      <DependentUpon>UC_KH_XemDSVacxin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC_con\UC_KH_XemToaThuoc.resx">
+      <DependentUpon>UC_KH_XemToaThuoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhachHang\UC_con\UC_KH_XemVaHuyDichVu.resx">
+      <DependentUpon>UC_KH_XemVaHuyDichVu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="QLChiNhanh\QLCN_main.resx">
+      <DependentUpon>QLCN_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QLChiNhanh\Usc\Usc_QLCN10_DSHoaDon.resx">
+      <DependentUpon>Usc_QLCN10_DSHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QLChiNhanh\Usc\Usc_QLCN11_TKDV.resx">
+      <DependentUpon>Usc_QLCN11_TKDV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QLChiNhanh\Usc\Usc_QLCN1_TKDoanhThu.resx">
+      <DependentUpon>Usc_QLCN1_TKDoanhThu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QLChiNhanh\Usc\Usc_QLCN2_QLNV.resx">
+      <DependentUpon>Usc_QLCN2_QLNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QLChiNhanh\Usc\Usc_QLCN3_HSNV.resx">
+      <DependentUpon>Usc_QLCN3_HSNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QLChiNhanh\Usc\Usc_QLCN4_TKSP.resx">
+      <DependentUpon>Usc_QLCN4_TKSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QLChiNhanh\Usc\Usc_QLCN4_TKSPKhac.resx">
+      <DependentUpon>Usc_QLCN4_TKSPKhac.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QLChiNhanh\Usc\Usc_QLCN4_TKThuoc.resx">
+      <DependentUpon>Usc_QLCN4_TKThuoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QLChiNhanh\Usc\Usc_QLCN4_TKVacxin.resx">
+      <DependentUpon>Usc_QLCN4_TKVacxin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QLChiNhanh\Usc\Usc_QLCN5_QLSP.resx">
+      <DependentUpon>Usc_QLCN5_QLSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QLChiNhanh\Usc\Usc_QLCN6_DSPet.resx">
+      <DependentUpon>Usc_QLCN6_DSPet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QLChiNhanh\Usc\Usc_QLCN6_LichSu.resx">
+      <DependentUpon>Usc_QLCN6_LichSu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QLChiNhanh\Usc\Usc_QLCN7_TKKH.resx">
+      <DependentUpon>Usc_QLCN7_TKKH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QLChiNhanh\Usc\Usc_QLCN9_QLDV.resx">
+      <DependentUpon>Usc_QLCN9_QLDV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCongTy\QLCT_main.resx">
+      <DependentUpon>QLCT_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCongTy\Usc\Usc_ALL_DSDV.resx">
+      <DependentUpon>Usc_ALL_DSDV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCongTy\Usc\Usc_QLCT10_QLTC.resx">
+      <DependentUpon>Usc_QLCT10_QLTC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCongTy\Usc\Usc_QLCT11_LSTP.resx">
+      <DependentUpon>Usc_QLCT11_LSTP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCongTy\Usc\Usc_QLCT12_DSHD.resx">
+      <DependentUpon>Usc_QLCT12_DSHD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCongTy\Usc\Usc_QLCT13_LSDV.resx">
+      <DependentUpon>Usc_QLCT13_LSDV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCongTy\Usc\Usc_QLCT14_TKHV.resx">
+      <DependentUpon>Usc_QLCT14_TKHV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCongTy\Usc\Usc_QLCT15_LSDD.resx">
+      <DependentUpon>Usc_QLCT15_LSDD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCongTy\Usc\Usc_QLCT1_DoanhThu.resx">
+      <DependentUpon>Usc_QLCT1_DoanhThu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCongTy\Usc\Usc_QLCT2_QLCN.resx">
+      <DependentUpon>Usc_QLCT2_QLCN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCongTy\Usc\Usc_QLCT3_HSCN.resx">
+      <DependentUpon>Usc_QLCT3_HSCN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCongTy\Usc\Usc_QLCT4_QLNV.resx">
+      <DependentUpon>Usc_QLCT4_QLNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCongTy\Usc\Usc_QLCT5_QLKM.resx">
+      <DependentUpon>Usc_QLCT5_QLKM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCongTy\Usc\Usc_QLCT6_QLDV.resx">
+      <DependentUpon>Usc_QLCT6_QLDV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCongTy\Usc\Usc_QLCT7_HSNV.resx">
+      <DependentUpon>Usc_QLCT7_HSNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCongTy\Usc\Usc_QLCT8_TKSP.resx">
+      <DependentUpon>Usc_QLCT8_TKSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCongTy\Usc\Usc_QLCT9_TKKH.resx">
+      <DependentUpon>Usc_QLCT9_TKKH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanTriVien\QTV_main.resx">
+      <DependentUpon>QTV_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanTriVien\Usc\Usc_QTV1_QLTK.resx">
+      <DependentUpon>Usc_QTV1_QLTK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TiepTan\Frm_TT6_ChiTiet.resx">
+      <DependentUpon>Frm_TT6_ChiTiet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TiepTan\TT_main.resx">
+      <DependentUpon>TT_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TiepTan\Usc\Usc_TT10_LSKham.resx">
+      <DependentUpon>Usc_TT10_LSKham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TiepTan\Usc\Usc_TT10_LSTiemPhong.resx">
+      <DependentUpon>Usc_TT10_LSTiemPhong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TiepTan\Usc\Usc_TT10_TraCuuThuCung.resx">
+      <DependentUpon>Usc_TT10_TraCuuThuCung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TiepTan\Usc\Usc_TT2_DKHVKH.resx">
+      <DependentUpon>Usc_TT2_DKHVKH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TiepTan\Usc\Usc_TT3_XNKhamBenh.resx">
+      <DependentUpon>Usc_TT3_XNKhamBenh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TiepTan\Usc\Usc_TT4_XNTiemPhong.resx">
+      <DependentUpon>Usc_TT4_XNTiemPhong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TiepTan\Usc\Usc_TT5_DKGoiTiemKH.resx">
+      <DependentUpon>Usc_TT5_DKGoiTiemKH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TiepTan\Usc\Usc_TT6_LapHoaDon.resx">
+      <DependentUpon>Usc_TT6_LapHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TiepTan\Usc\Usc_TT7_XemHDLap.resx">
+      <DependentUpon>Usc_TT7_XemHDLap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TiepTan\Usc\Usc_TT8_LSDieuDong.resx">
+      <DependentUpon>Usc_TT8_LSDieuDong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TiepTan\Usc\Usc_TT9_DatLichTaiQuay.resx">
+      <DependentUpon>Usc_TT9_DatLichTaiQuay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TiepTan\Usc\Usc_TT_DKTKKH.resx">
+      <DependentUpon>Usc_TT_DKTKKH.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="QuanLyCongTy\App.config" />
+    <None Include="Resources\BG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_TT_DSDV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TT_DaiDien.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ALL_XemThongTinCaNhan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BG_Glue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_TT_DKTKKH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_TT_DKHVKH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_TT_XNKB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_TT_XNTiemPhong.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_TT_DKGoiTiem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_TT_LapHoaDon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_TT_DSHoaDonLap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_TT_LSDieuDong.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_TT_Logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLCN_DaiDien.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_QLCN_QLNV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_QLCN_HSNV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_QLCN_TKSP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_QLCN_QLKM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_QLCN_SPTrongKho.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_QLCN_DSPet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_QLCN_TKKH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BS_LSK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BS_TTT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BS_Anh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BS_TPL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BS_XVC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BS_QLGT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BS_XDG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BS_TKCK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BH_BHTT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BH_CSTK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BH_QLSP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BH_CSTK_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BH_QLDDH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BH_QLHTK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BH_TTDV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BH_TCKH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BH_TTHD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BH_LO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BS_QLHSKB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLCT_DoanhThu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLCT_HieuSuat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLCT_HieuSuatNhanVien.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLCT_HoaDon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLCT_HoiVien.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLCT_KhuyenMai.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLCT_LichSuDichVu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLCT_NhanVien.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLCT_ThongKeKhachHang.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLCT_ThongKeSanPham.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLCT_ThuCung.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLCT_TiemPhong.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QTV_DaiDien.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QTV_QLTK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLCT_ChiNhanh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLCT_DaiDien.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLCT_DichVu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QLCT_DieuDong.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

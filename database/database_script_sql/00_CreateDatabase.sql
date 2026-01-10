@@ -1,0 +1,5 @@
+CREATE DATABASE PetCareDB
+GO
+
+USE PetCareDB
+GO

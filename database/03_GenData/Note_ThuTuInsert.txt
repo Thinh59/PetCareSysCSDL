@@ -1,0 +1,71 @@
+I. Không phụ thuộc
+
+TAIKHOAN
+
+CHINHANH
+
+DICHVU
+
+SANPHAM
+
+GOITIEM
+
+VACXIN
+
+THUOC
+
+II. Phụ thuộc trực tiếp
+
+KHACHHANG
+
+NHANVIEN
+
+THUCUNG
+
+HOIVIEN
+
+LS_DV
+
+ND_GOITIEM
+
+LS_DANGKY
+
+III. Phụ thuộc sâu
+
+CHITIEUNAM
+
+LS_DVTIEMPHONG
+
+LS_DVKHAMBENH
+
+TRIEUCHUNG
+
+CHUANDOAN
+
+IV. Sản phẩm – chi nhánh
+
+CT_SPCN
+
+LS_DVMUAHANG
+
+CT_MUAHANG
+
+V. Hóa đơn – khuyến mãi
+
+KHUYENMAI
+
+HOADON
+
+CT_HOADON
+
+CT_KHUYENMAI
+
+VI. Dịch vụ chi nhánh
+
+CHINHANH_DV
+
+VII. Toa thuốc (liên quan khám bệnh)
+
+TOA_THUOC
+
+
