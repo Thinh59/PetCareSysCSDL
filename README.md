@@ -194,6 +194,7 @@ Database/PetCareDB.sql
        connectionString="Data Source=PHCT59MTJJ\MSSQLSERVER01;Initial Catalog=PetCareDBOpt;Integrated Security=True;"
        providerName="System.Data.SqlClient" />
 </connectionStrings>
+```
 Nếu máy sử dụng SQL Server instance khác, vui lòng chỉnh lại Data Source cho phù hợp với connectionString cho 2 database có tối ưu và không tối ưu
 
 ### 4. Chạy ứng dụng
