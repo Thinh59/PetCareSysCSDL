@@ -3,23 +3,20 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace PetCare
 {
     public class DataConnection
     {
-        protected static string connectionString = "Data Source=PHCT59MTJJ\\MSSQLSERVER01;Initial Catalog=PetCareDB;Integrated Security=True;";
+        protected static string connectionString =
+        ConfigurationManager.ConnectionStrings["PetCareDB"].ConnectionString;
 
         public static void ChuyenCheDoKetNoi(bool isToiUu)
         {
-            if (isToiUu)
-            {
-                connectionString = "Data Source=PHCT59MTJJ\\MSSQLSERVER01;Initial Catalog=PetCareDBOpt;Integrated Security=True;";
-            }
-            else
-            {
-                connectionString = "Data Source=PHCT59MTJJ\\MSSQLSERVER01;Initial Catalog=PetCareDB;Integrated Security=True;";
-            }
+            string key = isToiUu ? "PetCareDBOpt" : "PetCareDB";
+            connectionString =
+                ConfigurationManager.ConnectionStrings[key].ConnectionString;
         }
 
         public static class LuuMaHoaDon
