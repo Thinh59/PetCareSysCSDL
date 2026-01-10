@@ -167,41 +167,6 @@ Các chức năng dưới đây được xây dựng dựa trên **đề bài m�
 - Cài đặt ứng dụng WinForms mô phỏng hệ thống thực tế
 ---
 
-## 🛠️ Cài đặt & Hướng dẫn (Installation)
-
-### 1. Clone dự án
-~~~bash
-git clone https://github.com/YourUsername/PetCare-Project.git
-~~~
-
-### 2. Cấu hình Database
-- Mở **SQL Server Management Studio**
-- Chạy file:
-~~~sql
-Database/PetCareDB.sql
-~~~
-
-### 3. Cấu hình kết nối Database
-
-Ứng dụng sử dụng **App.config** để cấu hình chuỗi kết nối.
-```xml
-<connectionStrings>
-  <add name="PetCareDB"
-       connectionString="Data Source=PHCT59MTJJ\MSSQLSERVER01;Initial Catalog=PetCareDB;Integrated Security=True;"
-       providerName="System.Data.SqlClient" />
-
-  <add name="PetCareDBOpt"
-       connectionString="Data Source=PHCT59MTJJ\MSSQLSERVER01;Initial Catalog=PetCareDBOpt;Integrated Security=True;"
-       providerName="System.Data.SqlClient" />
-</connectionStrings>
-```
-Nếu máy sử dụng SQL Server instance khác, vui lòng chỉnh lại Data Source cho phù hợp với connectionString cho 2 database có tối ưu và không tối ưu
-
-### 4. Chạy ứng dụng
-- Mở Solution bằng **Visual Studio**
-- Nhấn **F5**
----
-
 ## 📂 Cấu trúc thư mục
 
 Dự án được tổ chức theo hướng tách biệt rõ ràng giữa **Source Code** và **Database Script**, phục vụ cho việc phân tích – thiết kế – tối ưu CSDL theo yêu cầu môn **CSC12002 – Cơ Sở Dữ Liệu Nâng Cao**.
