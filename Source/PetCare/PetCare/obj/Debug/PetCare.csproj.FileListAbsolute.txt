@@ -115,3 +115,4 @@ D:\NA\Kì 5\Cơ Sở Dữ Liệu Nâng Cao\FinalProject\QL_ThuCung\PetCareSystem
 D:\NA\Kì 5\Cơ Sở Dữ Liệu Nâng Cao\FinalProject\QL_ThuCung\PetCareSystem\Source\PetCare\PetCare\obj\Debug\PetCare.csproj.CoreCompileInputs.cache
 D:\NA\Kì 5\Cơ Sở Dữ Liệu Nâng Cao\FinalProject\QL_ThuCung\PetCareSystem\Source\PetCare\PetCare\obj\Debug\PetCare.exe
 D:\NA\Kì 5\Cơ Sở Dữ Liệu Nâng Cao\FinalProject\QL_ThuCung\PetCareSystem\Source\PetCare\PetCare\obj\Debug\PetCare.pdb
+D:\NA\Kì 5\Cơ Sở Dữ Liệu Nâng Cao\FinalProject\QL_ThuCung\PetCareSystem\Source\PetCare\PetCare\obj\Debug\PetCare.Frm_TT6_ChonKhuyenMai.resources

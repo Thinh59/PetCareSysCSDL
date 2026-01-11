@@ -328,6 +328,10 @@ namespace PetCare
             return ExecuteQuery("dbo.sp_TT6_GetKhachHangChoThanhToan", null);
         }
 
+        // Trong ServiceDAL.cs
+
+        // Trong ServiceDAL.cs
+
         public string ThanhToanGioHang(string maKH, string maLSGD, string hinhThuc, int tongTien, string maCN)
         {
             using (SqlConnection conn = getConnect())
@@ -341,6 +345,9 @@ namespace PetCare
                 cmd.Parameters.AddWithValue("@TongTien", tongTien);
                 cmd.Parameters.AddWithValue("@MaCN", maCN);
 
+                // Lưu ý: Không truyền tham số điểm vào đây vì SP không hỗ trợ.
+                // Việc trừ điểm sẽ được thực hiện thủ công ở tầng Giao diện (UC_KH_ThanhToan) bằng hàm CapNhatDiem_HoiVien.
+
                 try
                 {
                     conn.Open();
@@ -352,6 +359,67 @@ namespace PetCare
                     throw new Exception("Lỗi thanh toán giỏ hàng: " + ex.Message);
                 }
             }
+        }
+
+        public void CapNhatDiemTrucTiep(string maKH, int diemMoi)
+        {
+            string sql = "UPDATE KHACHHANG SET DiemTichLuy = @Diem WHERE MaKH = @MaKH";
+
+            SqlParameter[] p = {
+        new SqlParameter("@Diem", diemMoi),
+        new SqlParameter("@MaKH", maKH)
+    };
+            ExecuteNonQuery(sql, p);
+        }
+        public DataTable GetLichSuTuHoaDon(string maKH)
+        {
+            string sql = @"SELECT MaHD, NgayLap, TongTien 
+                   FROM HOADON 
+                   WHERE MaKH = @MaKH AND TrangThai = N'Đã thanh toán' 
+                   ORDER BY NgayLap DESC";
+
+            return ExecuteQuery(sql, new SqlParameter[] { new SqlParameter("@MaKH", maKH) });
+        }
+        public DataSet GetDiemLoyalty(string maKH)
+        {
+            DataSet ds = new DataSet();
+            using (SqlConnection conn = getConnect())
+            using (SqlCommand cmd = new SqlCommand("SP_HV_XemDiemLoyalty", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@MaKH", maKH);
+                new SqlDataAdapter(cmd).Fill(ds);
+            }
+            return ds;
+        }
+        public int GetDiemHienTai_HoiVien(string maKH)
+        {
+            string sql = "SELECT DiemLoyalty FROM HOIVIEN WHERE MaKH = @MaKH";
+
+            DataTable dt = ExecuteQuery(sql, new SqlParameter[] { new SqlParameter("@MaKH", maKH) });
+
+            if (dt.Rows.Count > 0 && dt.Rows[0][0] != DBNull.Value)
+                return Convert.ToInt32(dt.Rows[0][0]);
+
+            return 0;
+        }
+
+        public void CapNhatDiem_HoiVien(string maKH, int diemMoi)
+        {
+            string sql = "UPDATE HOIVIEN SET DiemLoyalty = @Diem WHERE MaKH = @MaKH";
+
+            ExecuteNonQuery(sql, new SqlParameter[] {
+        new SqlParameter("@Diem", diemMoi),
+        new SqlParameter("@MaKH", maKH)
+    });
+        }
+        public int GetDiemHienTai_Simple(string maKH)
+        {
+            string sql = "SELECT DiemTichLuy FROM KHACHHANG WHERE MaKH = @MaKH";
+            DataTable dt = ExecuteQuery(sql, new SqlParameter[] { new SqlParameter("@MaKH", maKH) });
+            if (dt.Rows.Count > 0 && dt.Rows[0][0] != DBNull.Value)
+                return Convert.ToInt32(dt.Rows[0][0]);
+            return 0;
         }
         public DataTable TimKiemHoaDon(string tuKhoa, string maNV)
         {
@@ -589,6 +657,49 @@ namespace PetCare
             }
         }
 
+        // Thêm vào class ServiceDAL
+
+        public void LuuChiTietKhuyenMai(string maHD, string maKM, int soLuong, decimal tienKM)
+        {
+            // Lưu ý: maKM cho điểm Loyalty thường là 'KM004' hoặc 'LOYALTY' tùy dữ liệu của bạn.
+            // Dưới đây tôi dùng câu lệnh INSERT trực tiếp
+            string sql = "INSERT INTO CT_KHUYENMAI (MaHD, MaKM, SoLuongDung, TienKM) VALUES (@MaHD, @MaKM, @SoLuong, @TienKM)";
+
+            ExecuteNonQuery(sql, new SqlParameter[] {
+        new SqlParameter("@MaHD", maHD),
+        new SqlParameter("@MaKM", maKM),
+        new SqlParameter("@SoLuong", soLuong),
+        new SqlParameter("@TienKM", tienKM)
+            });
+        }
+
+        public int GetDiemDaSuDungChoGiaoDich(string maLSGD)
+        {
+            string sql = @"
+            SELECT ISNULL(SUM(SoLuongDung), 0) 
+            FROM CT_KHUYENMAI KM
+            JOIN CT_HOADON CT ON KM.MaHD = CT.MaHD
+            WHERE CT.MaLSGD = @MaLSGD 
+              AND (KM.MaKM = 'KM004' OR KM.MaKM = 'LOYALTY')";
+
+            try
+            {
+                object result = ExecuteScalar(sql, new SqlParameter[] { new SqlParameter("@MaLSGD", maLSGD) });
+                return result != null ? Convert.ToInt32(result) : 0;
+            }
+            catch { return 0; }
+        }
+        public object ExecuteScalar(string sql, SqlParameter[] parameters)
+        {
+            using (SqlConnection conn = getConnect())
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.CommandType = CommandType.Text;
+                if (parameters != null) cmd.Parameters.AddRange(parameters);
+                conn.Open();
+                return cmd.ExecuteScalar();
+            }
+        }
 
         // PHẦN D: PHÂN HỆ KHÁCH HÀNG
 
@@ -974,6 +1085,39 @@ namespace PetCare
             });
             return true;
         }
+
+        public DataTable GetLichSuTuHoaDon_Simple(string maKH)
+        {
+            string sql = @"
+        SELECT MaHD, NgayLap, TienThanhToan, TienTruocKM, TrangThaiHD 
+        FROM HOADON 
+        WHERE MaKH = @MaKH 
+        ORDER BY NgayLap DESC, MaHD DESC";
+
+            return ExecuteQuery(sql, new SqlParameter[] { new SqlParameter("@MaKH", maKH) });
+        }
+
+        public int GetDiemDaDungTrongHoaDon(string maHD)
+        {
+            string sql = @"
+        SELECT ISNULL(SUM(SoLuongDung), 0)
+        FROM CT_KHUYENMAI
+        WHERE MaHD = @MaHD AND (MaKM = 'KM004' OR MaKM = 'LOYALTY')";
+
+            try
+            {
+                using (SqlConnection conn = getConnect())
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@MaHD", maHD);
+                    conn.Open();
+                    object result = cmd.ExecuteScalar();
+                    return result != null ? Convert.ToInt32(result) : 0;
+                }
+            }
+            catch { return 0; }
+        }
         public DataTable GetThongTinChiNhanh() { return ExecuteProcedure("SP_XemThongTinChiNhanh", null); }
         public DataTable GetDanhSachKhuyenMai(string maKH) { return ExecuteProcedure("SP_KH_XemKhuyenMai", new SqlParameter[] { new SqlParameter("@MaKH", maKH) }); }
 
@@ -992,19 +1136,6 @@ namespace PetCare
         }
 
         public DataTable GetThongTinHoiVien(string maKH) { return ExecuteProcedure("SP_HV_XemThongTin", new SqlParameter[] { new SqlParameter("@MaKH", maKH) }); }
-
-        public DataSet GetDiemLoyalty(string maKH)
-        {
-            DataSet ds = new DataSet();
-            using (SqlConnection conn = getConnect())
-            using (SqlCommand cmd = new SqlCommand("SP_HV_XemDiemLoyalty", conn))
-            {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@MaKH", maKH);
-                new SqlDataAdapter(cmd).Fill(ds);
-            }
-            return ds;
-        }
 
         public DataSet GetThongKeChiTieu(string maKH)
         {

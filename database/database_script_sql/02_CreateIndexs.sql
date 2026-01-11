@@ -19,7 +19,7 @@ INCLUDE ([MaKH], [MaDichVu], [NgayDatTruoc]);
 -- Tạo Index cho số điện thoại để tìm khách nhanh
 CREATE NONCLUSTERED INDEX IX_KHACHHANG_SDT 
 ON [dbo].[KHACHHANG] ([SDT_KH])
-INCLUDE ([HoTen_KH]); -- Kèm thêm họ tên để lấy ra luôn khỏi cần về bảng chính
+INCLUDE ([HoTen_KH]); 
 GO
 
 -- Tạo thêm Index cho các khóa ngoại để JOIN nhanh hơn (giảm chi phí Join)
@@ -31,7 +31,7 @@ CREATE NONCLUSTERED INDEX IX_THUCUNG_MaKH
 ON [dbo].[THUCUNG] ([MaKH]);
 GO
 
--- Tạo Index tối ưu cho bảng Lịch Sử Dịch Vụ (theo gợi ý của SQL Server)
+-- Tạo Index tối ưu cho bảng Lịch Sử Dịch Vụ
 CREATE NONCLUSTERED INDEX IX_LSDV_GoiYTuSQL
 ON [dbo].[LS_DV] ([MaDichVu], [TrangThaiGD])
 INCLUDE ([MaKH], [NgayDatTruoc]);
