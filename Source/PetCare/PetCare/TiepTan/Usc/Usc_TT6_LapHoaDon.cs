@@ -12,10 +12,8 @@ namespace PetCare
         ServiceDAL serviceDAL = new ServiceDAL();
         private BindingList<Class_TT6_HoaDon> danhSachHDLap = new BindingList<Class_TT6_HoaDon>();
 
-        // Biến cờ để tránh lỗi khi form đang load
         private bool isLoaded = false;
 
-        // Biến lưu thông tin giảm giá
         private decimal tienGiamGia = 0;
         private int diemLoyaltySuDung = 0;
 
@@ -25,50 +23,32 @@ namespace PetCare
             dgv_TT6_HoaDon.AutoGenerateColumns = true;
             dgv_TT6_HoaDon.DataSource = danhSachHDLap;
 
-            // Load dữ liệu khi khởi tạo
-            LoadThongTinChung(); // Load NV, CN, MaHD mới
+            LoadThongTinChung(); 
             LoadComboBoxKhachHang();
 
-            isLoaded = true; // Đánh dấu đã load xong
+            isLoaded = true; 
         }
 
-        // --- 1. LOAD THÔNG TIN CHUNG (NV, CN, MaHD Mới) ---
         private void LoadThongTinChung()
         {
             try
             {
-                // A. Lấy thông tin Nhân viên và Chi nhánh từ Session
+             
                 string maNV = SessionData.MaNV;
                 string tenNV = SessionData.TenHienThi;
                 string tenCN = SessionData.TenCN;
-                //if (string.IsNullOrEmpty(maNV))
-                //{
-                //    maNV = "NV00002"; // Giả sử NV002 là nhân viên đang trực
-                //}
-                //if (!string.IsNullOrEmpty(maNV))
-                //{
-                //    DataTable dtNV = serviceDAL.GetThongTinNhanVienLap(maNV);
-                //    if (dtNV.Rows.Count > 0)
-                //    {
-                //        txtBox_TT6_NVLap.Text = dtNV.Rows[0]["HoTenNV"].ToString(); // Hiển thị tên
-                //        txb_TT6_MaCN.Text = dtNV.Rows[0]["TenCN"].ToString();       // Hiển thị tên CN
-                //    }
-                //}
+                
 
                 txtBox_TT6_NVLap.Text = tenNV;
                 txb_TT6_MaCN.Text = tenCN;
-                // B. Lấy Mã Hóa Đơn tiếp theo (HD00000023)
                 txtBox_TT6_MaHD.Text = serviceDAL.GetNextMaHD();
             }
-            catch { /* Bỏ qua lỗi nhỏ UI */ }
+            catch { }
         }
-
-        // --- 2. Load ComboBox Khách Hàng ---
         private void LoadComboBoxKhachHang()
         {
             try
             {
-                // Tạm thời ngắt sự kiện để tránh lỗi
                 cmb_TT6_KH_Ten_SDT.SelectedIndexChanged -= cmb_TT6_KH_Ten_SDT_SelectedIndexChanged;
 
                 DataTable dt = serviceDAL.GetKhachHangChoThanhToan();
@@ -78,7 +58,6 @@ namespace PetCare
 
                 cmb_TT6_KH_Ten_SDT.SelectedIndex = -1;
 
-                // Gắn lại sự kiện
                 cmb_TT6_KH_Ten_SDT.SelectedIndexChanged += cmb_TT6_KH_Ten_SDT_SelectedIndexChanged;
             }
             catch (Exception ex)
@@ -87,18 +66,14 @@ namespace PetCare
             }
         }
 
-        // --- 3. Sự kiện chọn Khách Hàng ---
         private void cmb_TT6_KH_Ten_SDT_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Kiểm tra isLoaded để tránh lỗi khi form mới mở
             if (!isLoaded || cmb_TT6_KH_Ten_SDT.SelectedIndex == -1) return;
 
-            // Kiểm tra giá trị null
             if (cmb_TT6_KH_Ten_SDT.SelectedValue == null) return;
 
             string maKH = cmb_TT6_KH_Ten_SDT.SelectedValue.ToString();
 
-            // Reset các thông tin giảm giá cũ khi chọn khách mới
             tienGiamGia = 0;
             diemLoyaltySuDung = 0;
             txb_TT6_KM.Text = "0";
@@ -106,7 +81,6 @@ namespace PetCare
             LoadDichVuCuaKhachHang(maKH);
         }
 
-        // --- 4. Hàm Load Dịch Vụ ---
         private void LoadDichVuCuaKhachHang(string maKH)
         {
             try
@@ -118,7 +92,6 @@ namespace PetCare
                     txtBox_TT6_MaKHHD.Text = maKH;
                     txtBox_TT6_SDT.Text = dt.Rows[0]["SDT_KH"].ToString();
 
-                    // Reset lại Mã HD mới nhất (đề phòng có người khác vừa tạo HD)
                     txtBox_TT6_MaHD.Text = serviceDAL.GetNextMaHD();
 
                     danhSachHDLap.Clear();
@@ -140,13 +113,11 @@ namespace PetCare
                     }
                     dgv_TT6_HoaDon.Refresh();
 
-                    // Hiển thị tiền
-                    txb_TT6_TruocKM.Text = tongCong.ToString("N0"); // Tiền gốc
-                    CapNhatTongTienCuoi(); // Tính lại tổng tiền sau khi trừ KM (nếu có)
+                    txb_TT6_TruocKM.Text = tongCong.ToString("N0");
+                    CapNhatTongTienCuoi(); 
                 }
                 else
                 {
-                    // Trường hợp này ít xảy ra nếu query combobox đúng
                     danhSachHDLap.Clear();
                     txtBox_TT6_TongTien.Text = "0";
                     txb_TT6_TruocKM.Text = "0";
@@ -158,7 +129,6 @@ namespace PetCare
             }
         }
 
-        // --- HÀM TÍNH TOÁN TIỀN CUỐI CÙNG ---
         private void CapNhatTongTienCuoi()
         {
             decimal tienGoc = 0;
@@ -171,87 +141,53 @@ namespace PetCare
             txb_TT6_KM.Text = tienGiamGia.ToString("N0");
         }
 
-        // --- 5. NÚT CHI TIẾT KHUYẾN MÃI (LOGIC MỚI) ---
         private void btn_TT6_ChiTietKM_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtBox_TT6_MaKHHD.Text))
+            if (string.IsNullOrEmpty(txtBox_TT6_MaKHHD.Text) || cmb_TT6_KH_Ten_SDT.SelectedValue == null)
             {
-                MessageBox.Show("Vui lòng chọn khách hàng trước!");
+                MessageBox.Show("Vui lòng chọn khách hàng và có dịch vụ để thanh toán!");
                 return;
             }
 
             try
             {
-                // Lấy thông tin hạng và điểm
-                //string maKH = txtBox_TT6_MaKHHD.Text;
-                if (cmb_TT6_KH_Ten_SDT.SelectedValue == null || cmb_TT6_KH_Ten_SDT.SelectedIndex == -1)
+                string maKH = cmb_TT6_KH_Ten_SDT.SelectedValue.ToString();
+
+                decimal tienGoc = 0;
+                decimal.TryParse(txb_TT6_TruocKM.Text.Replace(",", "").Replace(".", ""), out tienGoc);
+
+                if (tienGoc <= 0)
                 {
-                    return; // Nếu chưa chọn được Mã KH chuẩn thì dừng lại, không gọi SP để tránh lỗi
+                    MessageBox.Show("Hóa đơn bằng 0, không cần áp dụng khuyến mãi.");
+                    return;
                 }
 
-                // Lấy Mã KH an toàn
-                string maKH = cmb_TT6_KH_Ten_SDT.SelectedValue.ToString();
                 DataTable dtKM = serviceDAL.GetThongTinKhuyenMaiKH(maKH);
+
+                int diemHienCo = 0;
+                string capDo = "Thường";
 
                 if (dtKM.Rows.Count > 0)
                 {
-                    string capDo = dtKM.Rows[0]["CapDo"].ToString();
-                    int diemHienCo = dtKM.Rows[0]["DiemLoyalty"] != DBNull.Value ? Convert.ToInt32(dtKM.Rows[0]["DiemLoyalty"]) : 0;
+                    capDo = dtKM.Rows[0]["CapDo"].ToString();
+                    diemHienCo = dtKM.Rows[0]["DiemLoyalty"] != DBNull.Value ? Convert.ToInt32(dtKM.Rows[0]["DiemLoyalty"]) : 0;
+                }
 
-                    decimal tienGoc = 0;
-                    decimal.TryParse(txb_TT6_TruocKM.Text.Replace(",", "").Replace(".", ""), out tienGoc);
+                Frm_TT6_ChonKhuyenMai frmKM = new Frm_TT6_ChonKhuyenMai(maKH, diemHienCo, tienGoc, capDo);
 
-                    decimal giamGiaHang = 0;
-                    string tenHang = "Thường";
-
-                    if (capDo == "VIP") { giamGiaHang = tienGoc * 0.1m; tenHang = "VIP (10%)"; }
-                    else if (capDo == "Thân thiết") { giamGiaHang = tienGoc * 0.05m; tenHang = "Thân thiết (5%)"; }
-                    else if (capDo == "Cơ bản") { giamGiaHang = tienGoc * 0.03m; tenHang = "Cơ bản (3%)"; }
-
-                    string msg = $"Khách hàng: {capDo}\n" +
-                                 $"Điểm tích lũy: {diemHienCo} điểm (1 điểm = 1.000 VNĐ)\n\n" +
-                                 $"Giảm giá hạng thành viên ({tenHang}): {giamGiaHang:N0} VNĐ\n\n" +
-                                 $"Bạn có muốn sử dụng điểm Loyalty không?";
-
-                    DialogResult dr = MessageBox.Show(msg, "Áp dụng khuyến mãi", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
-                    decimal giamGiaDiem = 0;
-                    diemLoyaltySuDung = 0;
-
-                    if (dr == DialogResult.Yes)
-                    {
-                        decimal tienConLai = tienGoc - giamGiaHang;
-                        int diemCanDung = (int)(tienConLai / 1000);
-
-                        if (diemHienCo >= diemCanDung)
-                        {
-                            diemLoyaltySuDung = diemCanDung;
-                        }
-                        else
-                        {
-                            diemLoyaltySuDung = diemHienCo;
-                        }
-                        giamGiaDiem = diemLoyaltySuDung * 1000;
-                    }
-                    else if (dr == DialogResult.Cancel)
-                    {
-                        return; 
-                    }
-
-                    tienGiamGia = giamGiaHang + giamGiaDiem;
+                if (frmKM.ShowDialog() == DialogResult.OK)
+                {
+                    this.tienGiamGia = frmKM.TongTienGiam;      
+                    this.diemLoyaltySuDung = frmKM.DiemDaDung;  
 
                     CapNhatTongTienCuoi();
 
-                    MessageBox.Show($"Đã áp dụng:\n- Hạng {capDo}: -{giamGiaHang:N0}\n- Điểm ({diemLoyaltySuDung}): -{giamGiaDiem:N0}", "Thành công");
-                }
-                else
-                {
-                    MessageBox.Show("Khách hàng này chưa đăng ký hội viên nên không có khuyến mãi.");
+                    MessageBox.Show($"Đã áp dụng khuyến mãi!\n- Tổng giảm: {this.tienGiamGia:N0} VNĐ\n- Điểm sử dụng: {this.diemLoyaltySuDung}", "Thành công");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi tính khuyến mãi: " + ex.Message);
+                MessageBox.Show("Lỗi mở chi tiết khuyến mãi: " + ex.Message);
             }
         }
 
@@ -261,31 +197,71 @@ namespace PetCare
 
             string maKH = txtBox_TT6_MaKHHD.Text;
             string maNV = SessionData.MaNV;
+            if (string.IsNullOrEmpty(maNV)) maNV = txtBox_TT6_NVLap.Text.Trim();
             string maCN = SessionData.MaCN;
-
-            if (string.IsNullOrEmpty(maNV)) maNV = txtBox_TT6_NVLap.Text.Trim(); // Fallback nếu chưa đăng nhập
-
             DateTime ngayLap = dtp_TT6_NgayLapHD.Value;
-            decimal tongTien = 0;
-            decimal.TryParse(txtBox_TT6_TongTien.Text.Replace(",", "").Replace(".", ""), out tongTien);
+
+            decimal tienGoc = 0; 
+            decimal.TryParse(txb_TT6_TruocKM.Text.Replace(",", "").Replace(".", ""), out tienGoc);
+
+            decimal tienThanhToan = 0; 
+            decimal.TryParse(txtBox_TT6_TongTien.Text.Replace(",", "").Replace(".", ""), out tienThanhToan);
 
             if (MessageBox.Show("Xác nhận TẠO HÓA ĐƠN này?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 try
                 {
-                    string nextMaHD = serviceDAL.GetNextMaHD();
-
-                    string createdMaHD = serviceDAL.LuuHoaDonMoi(maKH, maNV, tongTien, ngayLap, maCN);
-
-                    if (diemLoyaltySuDung > 0)
-                    {
-                        serviceDAL.TruDiemLoyalty(maKH, diemLoyaltySuDung);
-                    }
+                    string createdMaHD = serviceDAL.LuuHoaDonMoi(maKH, maNV, tienGoc, ngayLap, maCN);
 
                     if (!string.IsNullOrEmpty(createdMaHD))
                     {
+                        string updateSql = "UPDATE HOADON SET TienThanhToan = @TienThucTra WHERE MaHD = @MaHD";
+                        serviceDAL.ExecuteNonQuery(updateSql, new System.Data.SqlClient.SqlParameter[] {
+                    new System.Data.SqlClient.SqlParameter("@TienThucTra", tienThanhToan),
+                    new System.Data.SqlClient.SqlParameter("@MaHD", createdMaHD)
+                });
+
+                        DataTable dtHV = serviceDAL.GetThongTinKhuyenMaiKH(maKH);
+                        string capDo = "Thường";
+                        if (dtHV.Rows.Count > 0) capDo = dtHV.Rows[0]["CapDo"].ToString();
+
+                        string maKM_Hang = "";
+                        decimal tienGiamHang = 0;
+
+                        if (capDo == "VIP") { maKM_Hang = "HVVIP"; tienGiamHang = tienGoc * 0.10m; }
+                        else if (capDo == "Thân thiết") { maKM_Hang = "HVThanThiet"; tienGiamHang = tienGoc * 0.05m; }
+                        else if (capDo == "Cơ bản") { maKM_Hang = "KM003"; tienGiamHang = tienGoc * 0.03m; } // Bạn nói mã 3% là KM003
+
+                        if (!string.IsNullOrEmpty(maKM_Hang) && tienGiamHang > 0)
+                        {
+                            serviceDAL.LuuChiTietKhuyenMai(createdMaHD, maKM_Hang, 1, tienGiamHang);
+                        }
+
+                        if (diemLoyaltySuDung > 0)
+                        {
+                            decimal tienGiamTuDiem = diemLoyaltySuDung * 1000;
+                            serviceDAL.LuuChiTietKhuyenMai(createdMaHD, "KM004", diemLoyaltySuDung, tienGiamTuDiem);
+                        }
+
+                        if (dtHV.Rows.Count > 0)
+                        {
+                            int diemHienCo = serviceDAL.GetDiemHienTai_HoiVien(maKH);
+                            int diemCong = (int)(tienThanhToan / 100000);
+
+                            int diemMoi = (diemHienCo - diemLoyaltySuDung) + diemCong;
+                            if (diemMoi < 0) diemMoi = 0;
+
+                            serviceDAL.CapNhatDiem_HoiVien(maKH, diemMoi);
+                        }
+
                         txtBox_TT6_MaHD.Text = createdMaHD;
-                        MessageBox.Show($"Lập hóa đơn thành công!\nMã HĐ: {createdMaHD}", "Thành công");
+
+                        string msg = $"Lập hóa đơn thành công!\nMã HĐ: {createdMaHD}\n\n";
+                        if (tienGiamHang > 0) msg += $"- Hạng {capDo}: -{tienGiamHang:N0} VNĐ\n";
+                        if (diemLoyaltySuDung > 0) msg += $"- Điểm ({diemLoyaltySuDung}): -{diemLoyaltySuDung * 1000:N0} VNĐ\n";
+                        msg += $"\nTổng thu: {tienThanhToan:N0} VNĐ";
+
+                        MessageBox.Show(msg, "Thành công");
 
                         LoadComboBoxKhachHang();
                         btn_TT6_Huy_Click(null, null);

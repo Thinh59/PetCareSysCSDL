@@ -178,7 +178,6 @@ namespace PetCare.KhachHang.UC
 
                 try
                 {
-                    // Nếu hàm thực thi xong mà không văng lỗi, chắc chắn đã thành công
                     dal.ThemVaoGioHang(SessionData.MaKH, cellMaSP.ToString(), maCN);
 
                     MessageBox.Show("Sản phẩm đã được thêm vào giỏ hàng thành công!", "Thông báo",
@@ -186,7 +185,6 @@ namespace PetCare.KhachHang.UC
                 }
                 catch (Exception ex)
                 {
-                    // Hiển thị các lỗi từ SQL (như RAISERROR "Hết hàng")
                     MessageBox.Show("Lỗi: " + ex.Message, "Thông báo lỗi",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }

@@ -412,7 +412,7 @@ BEGIN
         ISNULL(NV.HoTenNV, N'Chưa chỉ định') AS BacSi,
         TP.LoaiVacXin,
         TP.MaGoiTiem,
-        LS.NgayDatTruoc AS NgayDat, -- Lấy ngày đặt từ Header
+        LS.NgayDatTruoc AS NgayDat,
         TP.MaLSDVTP,
         DV.TenDV
     FROM LS_DV LS
@@ -2965,7 +2965,10 @@ IF OBJECT_ID('dbo.SP_KH_ThemSPVaoGioHang', 'P') IS NOT NULL
 	DROP PROC dbo.SP_KH_ThemSPVaoGioHang
 GO
 
-CREATE PROC SP_KH_ThemSPVaoGioHang
+USE PetCareDBOpt
+GO
+
+CREATE OR ALTER PROCEDURE SP_KH_ThemSPVaoGioHang
     @MaKH NVARCHAR(10),
     @MaSP NVARCHAR(10),
     @MaCN_SuDung NVARCHAR(10)
@@ -2973,33 +2976,42 @@ AS
 BEGIN
     SET NOCOUNT ON;
     DECLARE @MaLSDV_GioHang NVARCHAR(10), @GiaBan DECIMAL(18,2), @SLTonKho INT;
-    DECLARE @MaDV_MuaHang NVARCHAR(10) = 'DV003';
+    DECLARE @MaDV_MuaHang NVARCHAR(10) = 'DV003'; -- Giả sử DV003 là Mua hàng
 
+    -- 1. Kiểm tra tồn kho
     SELECT @GiaBan = GiaSPCN, @SLTonKho = SLTonKho 
     FROM CT_SPCN WHERE MaSP = @MaSP AND MaCN = @MaCN_SuDung;
 
+    -- 2. Kiểm tra xem khách đã có Giỏ hàng chưa
     SELECT @MaLSDV_GioHang = MaLSDV 
     FROM LS_DV 
     WHERE MaKH = @MaKH AND MaDichVu = @MaDV_MuaHang AND TrangThaiGD = N'Giỏ hàng';
 
     BEGIN TRANSACTION;
     BEGIN TRY
+        -- 3. Nếu chưa có giỏ hàng, tạo mới
         IF @MaLSDV_GioHang IS NULL
         BEGIN
-            DECLARE @NextID INT = (
-                SELECT ISNULL(MAX(CAST(SUBSTRING(MaLSDV, PATINDEX('%[0-9]%', MaLSDV), LEN(MaLSDV)) AS INT)), 0) + 1 
-                FROM LS_DV
-            );
+            DECLARE @NextID INT;
+
+            -- [SỬA LỖI TẠI ĐÂY] ---------------------------------------------
+            -- Chỉ lấy MAX của các mã bắt đầu bằng 'MH', bỏ qua 'LSDV'
+            SELECT @NextID = ISNULL(MAX(CAST(SUBSTRING(MaLSDV, 3, 7) AS INT)), 0) + 1
+            FROM LS_DV
+            WHERE MaLSDV LIKE 'MH[0-9]%'; -- Chỉ lọc các mã MH chuẩn
+            ------------------------------------------------------------------
             
+            -- Tạo mã dạng MH0000001
             SET @MaLSDV_GioHang = 'MH' + RIGHT('0000000' + CAST(@NextID AS NVARCHAR), 7);
 
-            INSERT INTO LS_DV (MaLSDV, MaKH, MaDichVu, TrangThaiGD, NgayDatTruoc)
-            VALUES (@MaLSDV_GioHang, @MaKH, @MaDV_MuaHang, N'Giỏ hàng', GETDATE());
+            INSERT INTO LS_DV (MaLSDV, MaKH, MaDichVu, TrangThaiGD, NgayDatTruoc, MaCN)
+            VALUES (@MaLSDV_GioHang, @MaKH, @MaDV_MuaHang, N'Giỏ hàng', GETDATE(), @MaCN_SuDung);
 
             INSERT INTO LS_DVMUAHANG (MaLSDVMH, HinhThucMH)
             VALUES (@MaLSDV_GioHang, N'Trực tuyến');
         END
 
+        -- 4. Kiểm tra tồn kho
         IF @SLTonKho <= 0
         BEGIN
             RAISERROR(N'Sản phẩm này hiện đã hết hàng tại chi nhánh.', 16, 1);
@@ -3007,6 +3019,7 @@ BEGIN
             RETURN;
         END
 
+        -- 5. Thêm sản phẩm vào chi tiết
         IF EXISTS (SELECT 1 FROM CT_MUAHANG WHERE MaLSDVMH = @MaLSDV_GioHang AND MaSP = @MaSP)
             UPDATE CT_MUAHANG 
             SET SoLuongSP = SoLuongSP + 1, 

@@ -18,7 +18,6 @@ namespace PetCare.HoiVien.UC_Con
         public UC_HV_ThongTinHoiVien()
         {
             InitializeComponent();
-            // Tự động load dữ liệu khi UserControl được nạp
             this.Load += UC_HV_ThongTinHoiVien_Load;
         }
 
@@ -53,12 +52,11 @@ namespace PetCare.HoiVien.UC_Con
         {
             UC_HV_DiemLoyalty UC_Diem = new UC_HV_DiemLoyalty();
 
-            // Đăng ký callback quay lại
             UC_Diem.QuayVeTrangChu += () =>
             {
                 pnl_HV_Content.Controls.Remove(UC_Diem);
                 pnl_HV_ThongTinHV.Visible = true;
-                LoadThongTinHoiVien(); // Refresh dữ liệu
+                LoadThongTinHoiVien(); 
             };
 
             pnl_HV_ThongTinHV.Visible = false;
@@ -92,6 +90,11 @@ namespace PetCare.HoiVien.UC_Con
                 parentForm.Show();
                 parentForm.BringToFront();
             }
+        }
+
+        private void textBox_HV_CapDo_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
