@@ -22,6 +22,10 @@ Hệ thống giải quyết bài toán quản lý quy trình khép kín:
 Dự án áp dụng:
 - Kiến trúc **3-Layer Architecture**
 - **SQL Server + Stored Procedures**
+
+Video Demo: [PetCare](https://youtu.be/rh5rYxi57kg)
+
+
 ---
 ## 🛠️ Cài đặt & Hướng dẫn (Installation)
 
